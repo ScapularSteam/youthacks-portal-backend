@@ -10,6 +10,9 @@ class event(models.Model):
     date = models.DateField()
     date_created = models.DateTimeField(db_default=timezone.now())
 
+    def __str__(self):
+        return self.name
+
 class document(models.Model):
     event = models.ForeignKey(event, on_delete=models.CASCADE)
     path = models.URLField()
