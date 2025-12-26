@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("all-events/", views.events, name="all-events")
+    path("all-events/", views.events_raw, name="all-events")
 ]
