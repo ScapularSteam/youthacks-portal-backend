@@ -46,7 +46,7 @@ class waiver(models.Model):
 class staff_signup(models.Model):
     event = models.ForeignKey(event, on_delete=models.CASCADE)
     staff = models.ForeignKey(staff, unique=True, on_delete=models.CASCADE)
-    waiver = models.ForeignKey(waiver, on_delete=models.CASCADE, blank=True)
+    waiver = models.ForeignKey(waiver, on_delete=models.CASCADE, blank=True, null=True)
     role_description = models.CharField(max_length=500)
     date_created = models.DateTimeField(db_default=timezone.now())
 
@@ -61,7 +61,7 @@ class parent(models.Model):
     date_created = models.DateTimeField(db_default=timezone.now())
 
 class attendee(models.Model):
-    parent = models.ForeignKey(parent, on_delete=models.CASCADE, blank=True)
+    parent = models.ForeignKey(parent, on_delete=models.CASCADE, blank=True, null=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     prefered_name = models.CharField(max_length=30)
@@ -90,8 +90,8 @@ class attendee_signup(models.Model):
     }
     event = models.ForeignKey(event, on_delete=models.CASCADE)
     attendee = models.ForeignKey(attendee, unique=True, on_delete=models.CASCADE)
-    project = models.ForeignKey(project, on_delete=models.CASCADE, blank=True)
-    waiver = models.ForeignKey(waiver, on_delete=models.CASCADE, blank=True)
+    project = models.ForeignKey(project, on_delete=models.CASCADE, blank=True, null=True)
+    waiver = models.ForeignKey(waiver, on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(choices=STATUS_TYPES, default="SIGNED_UP")
     date_created = models.DateTimeField(db_default=timezone.now())
 
@@ -105,8 +105,8 @@ class otp(models.Model):
         "STAFF_LOGIN": "Staff Login",
         "ATTENDEE_LOGIN": "Attendee Login",
     }
-    staff = models.ForeignKey(staff, on_delete=models.CASCADE, blank=True)
-    attendee = models.ForeignKey(attendee, on_delete=models.CASCADE, blank=True)
+    staff = models.ForeignKey(staff, on_delete=models.CASCADE, blank=True, null=True)
+    attendee = models.ForeignKey(attendee, on_delete=models.CASCADE, blank=True, null=True)
     login_type = models.CharField(choices=LOGIN_TYPES)
     token = models.CharField(max_length=500)
     expiry = models.IntegerField()
