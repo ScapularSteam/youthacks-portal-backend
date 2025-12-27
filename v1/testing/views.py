@@ -9,6 +9,7 @@ def index(request):
 # Little test to structure event objects as a dict and sent as HTTP response
 def events_raw(request):
     events_list_raw = event.objects.order_by("date")
+    print("THE NUMBER OF STORED EVENTS IS; ", )
     events_list_parsed = []
     for e in events_list_raw:
         events_list_parsed.append(
