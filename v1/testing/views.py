@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+
 from .models import event, document, staff, staff_signup, attendee, parent, project, waiver, attendee_signup, vote, otp
 
 
 #def index(request):
 
+@require_http_methods(["GET"])
 def event_json(request):
     list_raw = event.objects.order_by("date")
     print("number of records; ", )
@@ -24,6 +27,7 @@ def event_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def event_by_eventid_json(request, event_id):
     param = event_id
     list_raw = event.objects.filter(id=param)
@@ -43,6 +47,7 @@ def event_by_eventid_json(request, event_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def document_json(request):
     list_raw = document.objects.order_by("date_created")
     print("number of records; ", )
@@ -58,6 +63,7 @@ def document_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def document_by_eventid_json(request, event_id):
     param = event_id
     list_raw = document.objects.filter(event__id=param) # Double underscore accesses attributes from event
@@ -74,6 +80,7 @@ def document_by_eventid_json(request, event_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def document_by_documentid_json(request, document_id):
     param = document_id
     list_raw = document.objects.filter(id=param)
@@ -90,6 +97,7 @@ def document_by_documentid_json(request, document_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def staff_json(request):
     list_raw = staff.objects.order_by("date_created")
     print("number of records; ", )
@@ -106,6 +114,7 @@ def staff_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def staff_by_staffid_json(request, staff_id):
     param = staff_id
     list_raw = staff.objects.filter(id=param)
@@ -130,6 +139,7 @@ def staff_by_staffid_json(request, staff_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def waiver_json(request):
     list_raw = waiver.objects.order_by("date_created")
     print("number of records; ", )
@@ -146,6 +156,7 @@ def waiver_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def waiver_by_wavierid_json(request, waiver_id):
     param = waiver_id
     list_raw = waiver.objects.filter(id=param)
@@ -163,6 +174,7 @@ def waiver_by_wavierid_json(request, waiver_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def waiver_by_attendeesignupid_json(request, attendee_signup_id):
     param = attendee_signup_id
     list_raw = attendee_signup.objects.filter(id=param)
@@ -180,6 +192,7 @@ def waiver_by_attendeesignupid_json(request, attendee_signup_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def waiver_by_staffsignupid_json(request, staff_signup_id):
     param = staff_signup_id
     list_raw = staff_signup.objects.filter(id=param)
@@ -197,6 +210,7 @@ def waiver_by_staffsignupid_json(request, staff_signup_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def staff_signup_json(request):
     list_raw = staff_signup.objects.order_by("date_created")
     print("number of records; ", )
@@ -224,6 +238,7 @@ def staff_signup_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def parent_json(request): 
     list_raw = parent.objects.order_by("date_created")
     print("number of records; ", )
@@ -245,6 +260,7 @@ def parent_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def parent_by_parentid_json(request, parent_id): 
     param = parent_id
     list_raw = parent.objects.filter(id=param)
@@ -263,6 +279,7 @@ def parent_by_parentid_json(request, parent_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def parent_by_attendeeid_json(request, attendee_id): 
     param = attendee_id
     list_raw = attendee.objects.filter(id=param)
@@ -281,6 +298,7 @@ def parent_by_attendeeid_json(request, attendee_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def attendee_json(request): 
     list_raw = attendee.objects.order_by("date_created")
     print("number of records; ", )
@@ -298,7 +316,7 @@ def attendee_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-
+@require_http_methods(["GET"])
 def attendee_by_attendeeid_json(request, attendee_id): 
     param = attendee_id
     list_raw = attendee.objects.filter(id=param)
@@ -317,6 +335,7 @@ def attendee_by_attendeeid_json(request, attendee_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def project_json(request): 
     list_raw = project.objects.order_by("date_created")
     print("number of records; ", )
@@ -336,6 +355,7 @@ def project_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def project_by_project_id_json(request, project_id): 
     param = project_id
     list_raw = project.objects.filter(id=param)
@@ -356,6 +376,7 @@ def project_by_project_id_json(request, project_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def project_by_attendeesignup_id_json(request, attendee_signup_id): 
     param = attendee_signup_id
     list_raw = attendee_signup.objects.filter(id=param)
@@ -376,6 +397,7 @@ def project_by_attendeesignup_id_json(request, attendee_signup_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def attendee_signup_json(request):
     list_raw = attendee_signup.objects.order_by("date_created")
     print("number of records; ", )
@@ -402,6 +424,7 @@ def attendee_signup_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def attendee_signup_by_attendeesignupid_json(request, attendee_signup_id):
     param = attendee_signup_id
     list_raw = attendee_signup.objects.filter(id=param)
@@ -429,6 +452,7 @@ def attendee_signup_by_attendeesignupid_json(request, attendee_signup_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def attendee_signup_by_eventid_json(request, event_id):
     param = event_id
     list_raw = attendee_signup.objects.filter(event__id=param)
@@ -456,6 +480,7 @@ def attendee_signup_by_eventid_json(request, event_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def vote_json(request):
     list_raw = vote.objects.order_by("date_created")
     print("number of records; ", )
@@ -474,6 +499,7 @@ def vote_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def vote_by_projectid_json(request, project_id):
     param = project_id
     list_raw = vote.objects.filter(project__id=param)
@@ -493,6 +519,7 @@ def vote_by_projectid_json(request, project_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def vote_by_attendeesignupid_json(request, attendee_signup_id):
     param = attendee_signup_id
     list_raw = vote.objects.filter(attendee_signup__id=param)
@@ -512,6 +539,7 @@ def vote_by_attendeesignupid_json(request, attendee_signup_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def otp_json(request):
     list_raw = otp.objects.order_by("date_created")
     print("number of records; ", )
@@ -530,6 +558,7 @@ def otp_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def otp_by_attendeeid_json(request, attendee_id):
     param = attendee_id
     list_raw = otp.objects.filter(attendee__id=param)
@@ -547,6 +576,7 @@ def otp_by_attendeeid_json(request, attendee_id):
         )
     return JsonResponse(list_parsed, safe=False)
 
+@require_http_methods(["GET"])
 def otp_by_staffid_json(request, staff_id):
     param = staff_id
     list_raw = otp.objects.filter(staff__id=param)
