@@ -1,0 +1,877 @@
+openapi: 3.0.0
+info:
+  title: Youthacks Portal API
+  description: Backend API for Youthacks Portal
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/testing
+    description: Development server
+basePath: /testing
+
+paths:
+  /event/:
+    get:
+      summary: List all events
+      operationId: event_all
+      tags:
+        - Events
+      responses:
+        "200":
+          description: List of all events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+
+  /event/event_id/{event_id}/:
+    get:
+      summary: Get event by ID
+      operationId: event_by_eventid
+      tags:
+        - Events
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Event ID
+      responses:
+        "200":
+          description: Event details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+
+  /document/:
+    get:
+      summary: List all documents
+      operationId: document_all
+      tags:
+        - Documents
+      responses:
+        "200":
+          description: List of all documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Document"
+
+  /document/event_id/{event_id}/:
+    get:
+      summary: Get documents by event ID
+      operationId: document_by_eventid
+      tags:
+        - Documents
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Event ID
+      responses:
+        "200":
+          description: Documents for event
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Document"
+
+  /document/document_id/{document_id}/:
+    get:
+      summary: Get document by ID
+      operationId: document_by_documentid
+      tags:
+        - Documents
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Document ID
+      responses:
+        "200":
+          description: Document details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Document"
+
+  /staff/:
+    get:
+      summary: List all staff
+      operationId: staff_all
+      tags:
+        - Staff
+      responses:
+        "200":
+          description: List of all staff (summary)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffSummary"
+
+  /staff/staff_id/{staff_id}/:
+    get:
+      summary: Get staff by ID (detailed)
+      operationId: staff_by_staffid
+      tags:
+        - Staff
+      parameters:
+        - name: staff_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Staff ID
+      responses:
+        "200":
+          description: Detailed staff information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffDetailed"
+
+  /waiver/:
+    get:
+      summary: List all waivers
+      operationId: waiver_all
+      tags:
+        - Waivers
+      responses:
+        "200":
+          description: List of all waivers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waiver"
+
+  /waiver/waiver_id/{waiver_id}/:
+    get:
+      summary: Get waiver by ID
+      operationId: waiver_by_waiverid
+      tags:
+        - Waivers
+      parameters:
+        - name: waiver_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Waiver ID
+      responses:
+        "200":
+          description: Waiver details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waiver"
+
+  /waiver/attendee_signup_id/{attendee_signup_id}/:
+    get:
+      summary: Get waiver by attendee signup ID
+      operationId: waiver_by_attendeesignupid
+      tags:
+        - Waivers
+      parameters:
+        - name: attendee_signup_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee Signup ID
+      responses:
+        "200":
+          description: Waiver for attendee signup
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waiver"
+
+  /waiver/staff_signup_id/{staff_signup_id}/:
+    get:
+      summary: Get waiver by staff signup ID
+      operationId: waiver_by_staffsignupid
+      tags:
+        - Waivers
+      parameters:
+        - name: staff_signup_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Staff Signup ID
+      responses:
+        "200":
+          description: Waiver for staff signup
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waiver"
+
+  /staff_signup/:
+    get:
+      summary: List all staff signups
+      operationId: staff_signup_all
+      tags:
+        - Staff Signups
+      responses:
+        "200":
+          description: List of all staff signups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffSignup"
+
+  /parent/:
+    get:
+      summary: List all parents
+      operationId: parent_all
+      tags:
+        - Parents
+      responses:
+        "200":
+          description: List of all parents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Parent"
+
+  /parent/parent_id/{parent_id}/:
+    get:
+      summary: Get parent by ID
+      operationId: parent_by_parentid
+      tags:
+        - Parents
+      parameters:
+        - name: parent_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Parent ID
+      responses:
+        "200":
+          description: Parent details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ParentSummary"
+
+  /parent/attendee_id/{attendee_id}/:
+    get:
+      summary: Get parent by attendee ID
+      operationId: parent_by_attendeeid
+      tags:
+        - Parents
+      parameters:
+        - name: attendee_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee ID
+      responses:
+        "200":
+          description: Parent of attendee
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ParentSummary"
+
+  /attendee/:
+    get:
+      summary: List all attendees
+      operationId: attendee_all
+      tags:
+        - Attendees
+      responses:
+        "200":
+          description: List of all attendees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AttendeeSummary"
+
+  /attendee/attendee_id/{attendee_id}/:
+    get:
+      summary: Get attendee by ID
+      operationId: attendee_by_attendeeid
+      tags:
+        - Attendees
+      parameters:
+        - name: attendee_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee ID
+      responses:
+        "200":
+          description: Attendee details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AttendeeSummary"
+
+  /project/:
+    get:
+      summary: List all projects
+      operationId: project_all
+      tags:
+        - Projects
+      responses:
+        "200":
+          description: List of all projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
+  /project/project_id/{project_id}/:
+    get:
+      summary: Get project by ID
+      operationId: project_by_projectid
+      tags:
+        - Projects
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Project ID
+      responses:
+        "200":
+          description: Project details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
+  /project/attendee_signup_id/{attendee_signup_id}/:
+    get:
+      summary: Get project by attendee signup ID
+      operationId: project_by_attendeesignupid
+      tags:
+        - Projects
+      parameters:
+        - name: attendee_signup_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee Signup ID
+      responses:
+        "200":
+          description: Project for attendee signup
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
+  /attendee_signup/:
+    get:
+      summary: List all attendee signups
+      operationId: attendee_signup_all
+      tags:
+        - Attendee Signups
+      responses:
+        "200":
+          description: List of all attendee signups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AttendeeSignup"
+
+  /attendee_signup/attendee_signup_id/{attendee_signup_id}/:
+    get:
+      summary: Get attendee signup by ID
+      operationId: attendee_signup_by_attendeesignupid
+      tags:
+        - Attendee Signups
+      parameters:
+        - name: attendee_signup_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee Signup ID
+      responses:
+        "200":
+          description: Attendee signup details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AttendeeSignup"
+
+  /attendee_signup/event_id/{event_id}/:
+    get:
+      summary: Get attendee signups by event ID
+      operationId: attendee_signup_by_eventid
+      tags:
+        - Attendee Signups
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Event ID
+      responses:
+        "200":
+          description: Attendee signups for event
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AttendeeSignup"
+
+  /vote/:
+    get:
+      summary: List all votes
+      operationId: vote_all
+      tags:
+        - Votes
+      responses:
+        "200":
+          description: List of all votes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vote"
+
+  /vote/project_id/{project_id}/:
+    get:
+      summary: Get votes by project ID
+      operationId: vote_by_projectid
+      tags:
+        - Votes
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Project ID
+      responses:
+        "200":
+          description: Votes for project
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vote"
+
+  /vote/attendee_signup_id/{attendee_signup_id}/:
+    get:
+      summary: Get votes by attendee signup ID
+      operationId: vote_by_attendeesignupid
+      tags:
+        - Votes
+      parameters:
+        - name: attendee_signup_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee Signup ID
+      responses:
+        "200":
+          description: Votes by attendee signup
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vote"
+
+  /otp/:
+    get:
+      summary: List all OTPs
+      operationId: otp_all
+      tags:
+        - OTPs
+      responses:
+        "200":
+          description: List of all OTPs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OTP"
+
+  /otp/attendee_id/{attendee_id}/:
+    get:
+      summary: Get OTPs by attendee ID
+      operationId: otp_by_attendeeid
+      tags:
+        - OTPs
+      parameters:
+        - name: attendee_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Attendee ID
+      responses:
+        "200":
+          description: OTPs for attendee
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OTP"
+
+  /otp/staff_id/{staff_id}/:
+    get:
+      summary: Get OTPs by staff ID
+      operationId: otp_by_staffid
+      tags:
+        - OTPs
+      parameters:
+        - name: staff_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Staff ID
+      responses:
+        "200":
+          description: OTPs for staff
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OTP"
+
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        logo:
+          type: string
+          format: uri
+        address:
+          type: string
+        date:
+          type: string
+          format: date
+        date_created:
+          type: string
+          format: date-time
+
+    Document:
+      type: object
+      properties:
+        id:
+          type: integer
+        event:
+          type: integer
+        path:
+          type: string
+          format: uri
+        date_created:
+          type: string
+          format: date-time
+
+    StaffSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        prefered_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        date_created:
+          type: string
+          format: date-time
+
+    StaffDetailed:
+      allOf:
+        - $ref: "#/components/schemas/StaffSummary"
+        - type: object
+          properties:
+            first_name:
+              type: string
+            mobile_number:
+              type: string
+            address:
+              type: string
+            dob:
+              type: string
+              format: date
+            type:
+              type: string
+              enum: [EXTERNAL, VOLUNTEER, ORGANISER]
+            medical_info:
+              type: string
+            dietary_requirements:
+              type: string
+
+    Waiver:
+      type: object
+      properties:
+        id:
+          type: integer
+        link:
+          type: string
+          format: uri
+        date_signed:
+          type: string
+          format: date-time
+        photo_consent:
+          type: boolean
+        date_created:
+          type: string
+          format: date-time
+
+    StaffSignup:
+      type: object
+      properties:
+        id:
+          type: integer
+        event:
+          type: string
+        event_id:
+          type: integer
+        staff_id:
+          type: integer
+        staff_name:
+          type: string
+        waiver_id:
+          type: integer
+          nullable: true
+        waiver_signed:
+          type: boolean
+        role_description:
+          type: string
+        date_created:
+          type: string
+          format: date-time
+
+    Parent:
+      type: object
+      properties:
+        id:
+          type: integer
+        prefered_name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        mobile_number:
+          type: string
+        address:
+          type: string
+        dob:
+          type: string
+          format: date
+        date_created:
+          type: string
+          format: date-time
+
+    ParentSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        prefered_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        date_created:
+          type: string
+          format: date-time
+
+    AttendeeSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+        prefered_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        date_created:
+          type: string
+          format: date-time
+
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+        event:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        cover_image:
+          type: string
+          format: uri
+        repo_link:
+          type: string
+          format: uri
+        playable_link:
+          type: string
+          format: uri
+        date_created:
+          type: string
+          format: date-time
+
+    AttendeeSignup:
+      type: object
+      properties:
+        id:
+          type: integer
+        event:
+          type: string
+        event_id:
+          type: integer
+        attendee_id:
+          type: integer
+        attendee_name:
+          type: string
+        waiver_id:
+          type: integer
+          nullable: true
+        waiver_signed:
+          type: boolean
+        date_created:
+          type: string
+          format: date-time
+
+    Vote:
+      type: object
+      properties:
+        id:
+          type: integer
+        attendee_name:
+          type: string
+        attendee_signup_id:
+          type: integer
+        project_name:
+          type: string
+        project_id:
+          type: integer
+        date_created:
+          type: string
+          format: date-time
+
+    OTP:
+      type: object
+      properties:
+        id:
+          type: integer
+        staff_name:
+          type: string
+        staff_id:
+          type: integer
+        attendee_name:
+          type: string
+        attendee_id:
+          type: integer
+        date_created:
+          type: string
+          format: date-time
+
+tags:
+  - name: Events
+    description: Event management
+  - name: Documents
+    description: Document management
+  - name: Staff
+    description: Staff management
+  - name: Waivers
+    description: Waiver management
+  - name: Staff Signups
+    description: Staff signup management
+  - name: Parents
+    description: Parent information
+  - name: Attendees
+    description: Attendee management
+  - name: Projects
+    description: Project management
+  - name: Attendee Signups
+    description: Attendee signup management
+  - name: Votes
+    description: Vote management
+  - name: OTPs
+    description: One-time password management
