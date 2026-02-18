@@ -24,8 +24,8 @@ def event_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def event_by_eventid_json(request):
-    param = request.GET.get('event_id', '')
+def event_by_eventid_json(request, event_id):
+    param = event_id
     list_raw = event.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -58,8 +58,8 @@ def document_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def document_by_eventid_json(request):
-    param = request.GET.get('event_id', '')
+def document_by_eventid_json(request, event_id):
+    param = event_id
     list_raw = document.objects.filter(event__id=param) # Double underscore accesses attributes from event
     print("number of records; ", )
     list_parsed = []
@@ -74,8 +74,8 @@ def document_by_eventid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def document_by_documentid_json(request):
-    param = request.GET.get('document_id', '')
+def document_by_documentid_json(request, document_id):
+    param = document_id
     list_raw = document.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -106,8 +106,8 @@ def staff_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def staff_by_staffid_json(request):
-    param = request.GET.get('staff_id', '')
+def staff_by_staffid_json(request, staff_id):
+    param = staff_id
     list_raw = staff.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -146,8 +146,8 @@ def waiver_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def waiver_by_wavierid_json(request):
-    param = request.GET.get('waiver_id', '')
+def waiver_by_wavierid_json(request, waiver_id):
+    param = waiver_id
     list_raw = waiver.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -163,8 +163,8 @@ def waiver_by_wavierid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def waiver_by_attendeesignupid_json(request):
-    param = request.GET.get('attendee_signup_id', '')
+def waiver_by_attendeesignupid_json(request, attendee_signup_id):
+    param = attendee_signup_id
     list_raw = attendee_signup.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -180,8 +180,8 @@ def waiver_by_attendeesignupid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def waiver_by_staffsignupid_json(request):
-    param = request.GET.get('staff_signup_id', '')
+def waiver_by_staffsignupid_json(request, staff_signup_id):
+    param = staff_signup_id
     list_raw = staff_signup.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -245,9 +245,8 @@ def parent_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def parent_by_parentid_json(request): 
-
-    param = request.GET.get('parent_id', '')
+def parent_by_parentid_json(request, parent_id): 
+    param = parent_id
     list_raw = parent.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -264,9 +263,8 @@ def parent_by_parentid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def parent_by_attendeeid_json(request): 
-
-    param = request.GET.get('attendee_id', '')
+def parent_by_attendeeid_json(request, attendee_id): 
+    param = attendee_id
     list_raw = attendee.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -301,8 +299,8 @@ def attendee_json(request):
     return JsonResponse(list_parsed, safe=False)
 
 
-def attendee_by_attendeeid_json(request): 
-    param = request.GET.get('attendee_id', '')
+def attendee_by_attendeeid_json(request, attendee_id): 
+    param = attendee_id
     list_raw = attendee.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -338,8 +336,8 @@ def project_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def project_by_project_id_json(request): 
-    param = request.GET.get('project_id', '')
+def project_by_project_id_json(request, project_id): 
+    param = project_id
     list_raw = project.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -358,8 +356,8 @@ def project_by_project_id_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def project_by_attendeesignup_id_json(request): 
-    param = request.GET.get('attendee_signup_id', '')
+def project_by_attendeesignup_id_json(request, attendee_signup_id): 
+    param = attendee_signup_id
     list_raw = attendee_signup.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -404,8 +402,8 @@ def attendee_signup_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def attendee_signup_by_attendeesignupid_json(request):
-    param = request.GET.get('attendee_signup_id', '')
+def attendee_signup_by_attendeesignupid_json(request, attendee_signup_id):
+    param = attendee_signup_id
     list_raw = attendee_signup.objects.filter(id=param)
     print("number of records; ", )
     list_parsed = []
@@ -431,8 +429,8 @@ def attendee_signup_by_attendeesignupid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def attendee_signup_by_eventid_json(request):
-    param = request.GET.get('event_id', '')
+def attendee_signup_by_eventid_json(request, event_id):
+    param = event_id
     list_raw = attendee_signup.objects.filter(event__id=param)
     print("number of records; ", )
     list_parsed = []
@@ -476,8 +474,8 @@ def vote_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def vote_by_projectid_json(request):
-    param = request.GET.get('project_id', '')
+def vote_by_projectid_json(request, project_id):
+    param = project_id
     list_raw = vote.objects.filter(project__id=param)
     print("number of records; ", )
     list_parsed = []
@@ -495,8 +493,8 @@ def vote_by_projectid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def vote_by_attendeesignupid_json(request):
-    param = request.GET.get('attendee_signup_id', '')
+def vote_by_attendeesignupid_json(request, attendee_signup_id):
+    param = attendee_signup_id
     list_raw = vote.objects.filter(attendee_signup__id=param)
     print("number of records; ", )
     list_parsed = []
@@ -532,8 +530,8 @@ def otp_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def otp_by_attendeeid_json(request):
-    param = request.GET.get('attendee_id', '')
+def otp_by_attendeeid_json(request, attendee_id):
+    param = attendee_id
     list_raw = otp.objects.filter(attendee__id=param)
     print("number of records; ", )
     list_parsed = []
@@ -549,8 +547,8 @@ def otp_by_attendeeid_json(request):
         )
     return JsonResponse(list_parsed, safe=False)
 
-def otp_by_staffid_json(request):
-    param = request.GET.get('staff_id', '')
+def otp_by_staffid_json(request, staff_id):
+    param = staff_id
     list_raw = otp.objects.filter(staff__id=param)
     print("number of records; ", )
     list_parsed = []
