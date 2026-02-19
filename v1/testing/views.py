@@ -10,22 +10,29 @@ from .models import event, document, staff, staff_signup, attendee, parent, proj
 
 @require_http_methods(["GET"])
 def event_json(request):
-    list_raw = event.objects.order_by("date")
-    print("number of records; ", )
-    list_parsed = []
-    for l in list_raw:
-        list_parsed.append(
-            dict({
-                "id": l.id,
-                "name": l.name,
-                "description": l.description,
-                "logo": l.logo,
-                "address": l.address,
-                "date": l.date,
-                "date_created": l.date_created
-            })
-        )
-    return JsonResponse(list_parsed, safe=False)
+
+    # Return all events
+    if request.GET:
+        list_raw = event.objects.order_by("date")
+        print("number of records; ", )
+        list_parsed = []
+        for l in list_raw:
+            list_parsed.append(
+                dict({
+                    "id": l.id,
+                    "name": l.name,
+                    "description": l.description,
+                    "logo": l.logo,
+                    "address": l.address,
+                    "date": l.date,
+                    "date_created": l.date_created
+                })
+            )
+        return JsonResponse(list_parsed, safe=False)
+    
+    # Create a new event
+    elif request.POST:
+        
 
 @require_http_methods(["GET"])
 def event_by_eventid_json(request, event_id):
