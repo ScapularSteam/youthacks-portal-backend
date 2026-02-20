@@ -30,8 +30,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = True #os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [
-    host for host in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-    if host
+    'youthacks-portal.vercel.app'
 ]
 
 
