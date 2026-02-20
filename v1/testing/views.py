@@ -12,7 +12,7 @@ from .models import event, document, staff, staff_signup, attendee, parent, proj
 def event_json(request):
 
     # Return all events
-    if request.GET:
+    if request.method == "GET":
         list_raw = event.objects.order_by("date")
         print("number of records; ", )
         list_parsed = []
@@ -31,7 +31,13 @@ def event_json(request):
         return JsonResponse(list_parsed, safe=False)
     
     # Create a new event
-    elif request.POST:
+    elif request.method == "POST":
+        new_event = event(
+            name = "test",
+        )
+        new_event.save()
+        return JsonResponse({"message": "detected as POST"}, safe=False)
+
         
 
 @require_http_methods(["GET"])
