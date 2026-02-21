@@ -479,13 +479,25 @@ def attendee_signup_by_eventid_json(request, event_id):
             waiver_signed = True
             waiver_id = l.waiver.id
 
+        attendee_dict = dict({
+            "id": l.attendee.id,
+            "first_name": l.attendee.first_name,
+            "last_name": l.attendee.last_name,
+            "prefered_name": l.attendee.prefered_name,
+            "email": l.attendee.email,
+            "mobile_number": l.attendee.mobile_number,
+            "address": l.attendee.address,
+            "dob": l.attendee.dob,
+            "medical_info": l.attendee.medical_info,
+            "dietary_requirements": l.attendee.dietary_requirements
+        })
+
         list_parsed.append(
             dict({
                 "id": l.id,
                 "event": l.event.name,
                 "event_id": l.event.id,
-                "attendee_id": l.attendee.id,
-                "attendee_name": l.attendee.prefered_name,
+                "attendee": attendee_dict,
                 "waiver_id": waiver_id,
                 "waiver_signed": waiver_signed,
                 "date_created": l.date_created
