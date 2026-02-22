@@ -45,7 +45,7 @@ class waiver(models.Model):
 
 class staff_signup(models.Model):
     event = models.ForeignKey(event, on_delete=models.CASCADE)
-    staff = models.ForeignKey(staff, unique=True, on_delete=models.CASCADE)
+    staff = models.OneToOneField(staff, on_delete=models.CASCADE)
     waiver = models.ForeignKey(waiver, on_delete=models.CASCADE, blank=True, null=True)
     role_description = models.CharField(max_length=500)
     date_created = models.DateTimeField(db_default=timezone.now())
@@ -89,14 +89,14 @@ class attendee_signup(models.Model):
         "SCANNED_IN": "Scanned In",
     }
     event = models.ForeignKey(event, on_delete=models.CASCADE)
-    attendee = models.ForeignKey(attendee, unique=True, on_delete=models.CASCADE)
+    attendee = models.OneToOneField(attendee, on_delete=models.CASCADE)
     project = models.ForeignKey(project, on_delete=models.CASCADE, blank=True, null=True)
     waiver = models.ForeignKey(waiver, on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(choices=STATUS_TYPES, default="SIGNED_UP")
     date_created = models.DateTimeField(db_default=timezone.now())
 
 class vote(models.Model):
-    attendee_signup = models.ForeignKey(attendee_signup, unique=True, on_delete=models.CASCADE)
+    attendee_signup = models.OneToOneField(attendee_signup, on_delete=models.CASCADE)
     project = models.ForeignKey(project, on_delete=models.CASCADE)
     date_created = models.DateTimeField(db_default=timezone.now())
 
