@@ -82,8 +82,17 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-if os.environ.get('POSTGRES_PRISMA_URL'):
-    # Use full connection string (Vercel/Production)
+if os.environ.get('POSTGRES_URL_NON_POOLING'):
+    # Use non-pooling connection string (Vercel/Production)
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('POSTGRES_URL_NON_POOLING'),
+            conn_max_age=0,
+            conn_health_checks=False,
+        )
+    }
+elif os.environ.get('POSTGRES_PRISMA_URL'):
+    # Use pooling connection string as fallback
     DATABASES = {
         'default': dj_database_url.config(
             default=os.environ.get('POSTGRES_PRISMA_URL'),
