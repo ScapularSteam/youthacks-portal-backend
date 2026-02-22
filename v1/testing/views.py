@@ -60,7 +60,7 @@ def event_json(request):
             target_event.date = date
             target_event.save()
 
-            redirect_url = f"/events/{target_event.id}"
+            redirect_url = f"http://localhost:4321/events/{target_event.id}"
             return redirect(redirect_url)
             
             #return JsonResponse({
@@ -80,7 +80,7 @@ def event_json(request):
                 
             )
 
-            redirect_url = f"/events/{new_event.id}"
+            redirect_url = f"http://localhost:4321/events/{new_event.id}"
             return redirect(redirect_url)
 
             #return JsonResponse({
