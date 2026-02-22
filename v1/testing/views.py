@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+
 
 
 from .models import event, document, staff, staff_signup, attendee, parent, project, waiver, attendee_signup, vote, otp
@@ -58,6 +60,7 @@ def event_json(request):
             target_event.date = date
             target_event.save()
 
+            
             return JsonResponse({
                 "status": "record updated successful",
                 "id": target_event.id
@@ -75,12 +78,15 @@ def event_json(request):
                 
             )
 
-            return JsonResponse({
-                "status": "creation successful",
-                "id": new_event.id
-            },
-            safe=False
-            )
+            redirect_url = "/events" + new_event.id
+            return redirect(redirect_url)
+
+            #return JsonResponse({
+            #    "status": "creation successful",
+            #    "id": new_event.id
+            #},
+            #safe=False
+            #)
             
 
 @require_http_methods(["GET"])
