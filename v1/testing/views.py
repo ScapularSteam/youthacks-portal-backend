@@ -52,7 +52,7 @@ def event_json(request):
             target_event.save()
 
             return JsonResponse({
-                "status": "update successful",
+                "status": "record updated successful",
                 "id": target_event.id
             },
             safe=False
