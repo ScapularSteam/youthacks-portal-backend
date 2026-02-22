@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
+
 
 from .models import event, document, staff, staff_signup, attendee, parent, project, waiver, attendee_signup, vote, otp
 
 
 #def index(request):
 
-@require_http_methods(["GET"])
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
 def event_json(request):
 
     # Return all events
@@ -32,13 +35,46 @@ def event_json(request):
     
     # Create a new event
     elif request.method == "POST":
-        new_event = event(
-            name = "test",
-        )
-        new_event.save()
-        return JsonResponse({"message": "detected as POST"}, safe=False)
+        event_id = request.POST.get("id")
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+        logo = request.POST.get("logo")
+        address = request.POST.get("address")
+        date = request.POST.get("date")
 
-        
+        try:
+            target_event = event.objects.get(id=event_id)
+            target_event.name = name
+            target_event.description = description
+            target_event.logo = logo
+            target_event.address = address
+            target_event.date = date
+            target_event.save()
+
+            return JsonResponse({
+                "status": "update successful",
+                "id": target_event.id
+            },
+            safe=False
+            )
+
+        except event.DoesNotExist:
+            new_event = event.objects.create(
+                name = name,
+                description = description,
+                logo = logo,
+                address = address,
+                date = date,
+                
+            )
+
+            return JsonResponse({
+                "status": "creation successful",
+                "id": new_event.id
+            },
+            safe=False
+            )
+            
 
 @require_http_methods(["GET"])
 def event_by_eventid_json(request, event_id):
