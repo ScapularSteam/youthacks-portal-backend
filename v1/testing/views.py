@@ -70,7 +70,7 @@ def event_json(request):
             #safe=False
             #)
 
-        except event.DoesNotExist:
+        except event.DoesNotExist or TypeError:
             new_event = event.objects.create(
                 name = name,
                 description = description,
