@@ -52,7 +52,7 @@ def event_json(request):
             }, status=400, safe=False)
 
         try:
-            target_event = event.objects.get(id=int(event_id))
+            target_event = event.objects.get(id=str(event_id))
             target_event.name = name
             target_event.description = description
             target_event.logo = logo
