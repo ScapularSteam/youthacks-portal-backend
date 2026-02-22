@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-if os.environ.get('POSTGRES_URL'):
+if os.environ.get('POSTGRES_PRISMA_URL'):
     # Use full connection string (Vercel/Production)
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get('POSTGRES_URL'),
+            default=os.environ.get('POSTGRES_PRISMA_URL'),
             conn_max_age=0,
             conn_health_checks=False,
         )
