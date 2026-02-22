@@ -60,13 +60,15 @@ def event_json(request):
             target_event.date = date
             target_event.save()
 
+            redirect_url = "/events" + new_event.id
+            return redirect(redirect_url)
             
-            return JsonResponse({
-                "status": "record updated successful",
-                "id": target_event.id
-            },
-            safe=False
-            )
+            #return JsonResponse({
+            #    "status": "record updated successful",
+            #    "id": target_event.id
+            #},
+            #safe=False
+            #)
 
         except event.DoesNotExist:
             new_event = event.objects.create(
