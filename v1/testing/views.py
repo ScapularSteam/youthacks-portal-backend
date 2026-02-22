@@ -42,6 +42,13 @@ def event_json(request):
         address = request.POST.get("address")
         date = request.POST.get("date")
 
+        # Validate required fields
+        if not all([name, description, logo, address, date]):
+            return JsonResponse({
+                "status": "error",
+                "message": "Missing required fields: name, description, logo, address, date"
+            }, status=400, safe=False)
+
         try:
             target_event = event.objects.get(id=event_id)
             target_event.name = name
