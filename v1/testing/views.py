@@ -60,7 +60,7 @@ def event_json(request):
             target_event.date = date
             target_event.save()
 
-            redirect_url = "/events" + new_event.id
+            redirect_url = "/events" + target_event.id
             return redirect(redirect_url)
             
             #return JsonResponse({
@@ -89,6 +89,7 @@ def event_json(request):
             #},
             #safe=False
             #)
+        
             
 
 @require_http_methods(["GET"])
