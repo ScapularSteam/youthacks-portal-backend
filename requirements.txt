@@ -4,3 +4,4 @@ pyotp
 twilio
 psycopg2-binary
 python-dotenv
+dj-database-url
