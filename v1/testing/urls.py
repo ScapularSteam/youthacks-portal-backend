@@ -39,7 +39,7 @@ urlpatterns = [
     path("project/", views.project_json, name="project_all"),
     path("project/project_id/<str:project_id>/", views.project_by_project_id_json, name="project_by_projectid"),
     path("project/attendee_signup_id/<str:attendee_signup_id>/", views.project_by_attendeesignup_id_json, name="project_by_attendeesignupid"),
-    path("project/event_id/<str:event_id>/". views.project_by_event_id_json, name="project_by_eventid"),
+    path("project/event_id/<str:event_id>/", views.project_by_event_id_json, name="project_by_eventid"),
     
     # Attendee Signup endpoints
     path("attendee_signup/", views.attendee_signup_json, name="attendee_signup_all"),
