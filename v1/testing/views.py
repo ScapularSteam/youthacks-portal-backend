@@ -452,7 +452,30 @@ def project_by_attendeesignup_id_json(request, attendee_signup_id):
         list_parsed.append(
             dict({
                 "id": l.project.id,
-                "event": l.event.name,
+                "event_name": l.event.name,
+                "event_id": l.event.id,
+                "description": l.project.description,
+                "cover_image": l.project.cover_image,
+                "repo_link": l.project.repo_link,
+                "playable_link": l.project.playable_link,
+                "date_created": l.project.date_created
+            })
+        )
+    return JsonResponse(list_parsed, safe=False)
+
+@require_http_methods(["GET"])
+def project_by_event_id_json(request, project_id): 
+    param = project_id
+    list_raw = attendee_signup.objects.filter(event__id=param)
+    print("number of records; ", )
+    list_parsed = []
+    for l in list_raw:
+
+        list_parsed.append(
+            dict({
+                "id": l.project.id,
+                "event_name": l.event.name,
+                "event_id": l.event.id,
                 "description": l.project.description,
                 "cover_image": l.project.cover_image,
                 "repo_link": l.project.repo_link,
