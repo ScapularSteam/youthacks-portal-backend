@@ -473,14 +473,14 @@ def project_by_event_id_json(request, event_id):
 
         list_parsed.append(
             dict({
-                "id": l.project.id,
+                "id": l.id,
                 "event_name": l.event.name,
                 "event_id": l.event.id,
-                "description": l.project.description,
-                "cover_image": l.project.cover_image,
-                "repo_link": l.project.repo_link,
-                "playable_link": l.project.playable_link,
-                "date_created": l.project.date_created
+                "description": l.description,
+                "cover_image": l.cover_image,
+                "repo_link": l.repo_link,
+                "playable_link": l.playable_link,
+                "date_created": l.date_created
             })
         )
     return JsonResponse(list_parsed, safe=False)
