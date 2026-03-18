@@ -466,7 +466,7 @@ def project_by_attendeesignup_id_json(request, attendee_signup_id):
 @require_http_methods(["GET"])
 def project_by_event_id_json(request, event_id): 
     param = event_id
-    list_raw = attendee_signup.objects.filter(event__id=param)
+    list_raw = project.objects.filter(event__id=param)
     print("number of records; ", )
     list_parsed = []
     for l in list_raw:
