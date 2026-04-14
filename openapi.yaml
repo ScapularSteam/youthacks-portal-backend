@@ -856,7 +856,7 @@ tags:
   - name: Events
     description: Event management
   - name: Documents
-    description: Document management
+    description: Document management system
   - name: Staff
     description: Staff management
   - name: Waivers
